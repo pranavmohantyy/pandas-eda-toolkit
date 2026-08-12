@@ -1,7 +1,1 @@
-import pandas as pd
-
-def quick_summary(df):
-    print(f"Shape: {df.shape}")
-    print(f"Data types:\n{df.dtypes}")
-    print(f"Null counts:\n{df.isnull().sum()}")
-    print(f"Basic stats:\n{df.describe()}")
+import pandas as pd\nimport matplotlib.pyplot as plt\n\ndef quick_summary(df):\n    print(f"Shape: {df.shape}")\n    print(f"Data types:\n{df.dtypes}")\n    print(f"Null counts:\n{df.isnull().sum()}")\n    print(f"Basic stats:\n{df.describe()}")\n\ndef missing_report(df):\n    null_counts = df.isnull().sum()\n    total = df.shape[0]\n    null_percentage = (null_counts / total) * 100\n    report = pd.DataFrame({\n        'Null Count': null_counts,\n        'Null Percentage': null_percentage\n    })\n    print(report)\n    report['Null Percentage'].plot(kind='bar')\n    plt.title('Null Value Analysis')\n    plt.xlabel('Columns')\n    plt.ylabel('Percentage of Nulls')\n    plt.show()
