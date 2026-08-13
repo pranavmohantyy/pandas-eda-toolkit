@@ -13,3 +13,12 @@ def fill_nulls(df, strategy):
         return df.fillna(0)
     else:
         raise ValueError("Invalid strategy")
+
+
+def normalize(df, columns, method):
+    if method == 'min-max':
+        return (df[columns] - df[columns].min()) / (df[columns].max() - df[columns].min())
+    elif method == 'z-score':
+        return (df[columns] - df[columns].mean()) / df[columns].std()
+    else:
+        raise ValueError("Invalid normalization method")
