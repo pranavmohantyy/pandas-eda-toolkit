@@ -21,4 +21,15 @@ def normalize(df, columns, method):
     elif method == 'z-score':
         return (df[columns] - df[columns].mean()) / df[columns].std()
     else:
-        raise ValueError("Invalid normalization method")
+        raise ValueError("Invalid method")
+
+
+def encode_categoricals(df, columns, method):
+    if method == 'label':
+        for col in columns:
+            df[col] = df[col].astype('category').cat.codes
+    elif method == 'one-hot':
+        df = pd.get_dummies(df, columns=columns, drop_first=True)
+    else:
+        raise ValueError("Invalid encoding method")
+    return df
